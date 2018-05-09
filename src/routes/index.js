@@ -25,5 +25,19 @@ router.post('/createUser', async(req, res) => {
     res.sendStatus(200);
 });
 
+router.post('/updateUser/:no', async(req, res) => {
+    const {nama,rekening} = req.body;
+    const no = req.params.no;
+    const tableName = 'user';
+    const condition = { //utk kayak where kyk kondisi
+        no:no
+    }
+    const tableValue = {
+        nama: nama, 
+        rekening: rekening
+    }
+    const result = await db.updateRow(tableName, tableValue, condition, res); 
+    res.sendStatus(200);
+})
 
 export default router;
